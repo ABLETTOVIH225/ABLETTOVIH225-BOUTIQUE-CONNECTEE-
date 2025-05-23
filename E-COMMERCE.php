@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -105,121 +106,7 @@
   }
 </style>
 </head>
-<body>
-
-<header>
-  <h1>ABLETTOVIH BOUTIQUE Connectée</h1>
-</header>
-
-<div class="container">
-
-  <div class="products" id="products">
-    <!-- Les produits seront injectés ici -->
-  </div>
-
-  <div id="cart">
-    <h2>Panier</h2>
-    <div id="cart-items"></div>
-    <div id="total">Total : 0 FCFA</div>
-    <button id="orderBtn" disabled>Commander via WhatsApp</button>
-  </div>
-
-</div>
-
-<footer>
-  © 2025 MEGADIS Distribution - Tous droits réservés
-</footer>
-
-<script>
-  // Liste des produits
-  const products = [
-    {id: 1, name: "Montre Connectée", price: 7500, img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80"},
-    {id: 2, name: "Ecouteurs Bluetooth", price: 5000, img: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80"},
-    {id: 3, name: "Power Bank 10000mAh", price: 6000, img: "https://images.unsplash.com/photo-1504805572947-34fad45aed93?auto=format&fit=crop&w=400&q=80"},
-    {id: 4, name: "Smartphone Basique", price: 35000, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80"},
-    {id: 5, name: "Clé USB 64Go", price: 3000, img: "https://images.unsplash.com/photo-1583241505867-77b7387c6af2?auto=format&fit=crop&w=400&q=80"},
-    {id: 6, name: "Enceinte Bluetooth", price: 7000, img: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=400&q=80"},
-    {id: 7, name: "Chargeur Rapide", price: 2500, img: "https://images.unsplash.com/photo-1561079795-e17d4c3ea1a3?auto=format&fit=crop&w=400&q=80"},
-    {id: 8, name: "Casque Audio", price: 9000, img: "https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=400&q=80"},
-  ];
-
-  const cart = {};
-
-  function renderProducts() {
-    const productsDiv = document.getElementById("products");
-    products.forEach(p => {
-      const productEl = document.createElement("div");
-      productEl.classList.add("product");
-      productEl.innerHTML = `
-        <img src="${p.img}" alt="${p.name}">
-        <div class="product-name">${p.name}</div>
-        <div class="price">${p.price.toLocaleString()} FCFA</div>
-        <button onclick="addToCart(${p.id})">Ajouter au panier</button>
-      `;
-      productsDiv.appendChild(productEl);
-    });
-  }
-
-  function addToCart(id) {
-    if(cart[id]) {
-      cart[id]++;
-    } else {
-      cart[id] = 1;
-    }
-    renderCart();
-  }
-
-  function removeFromCart(id) {
-    if(cart[id]) {
-      cart[id]--;
-      if(cart[id] === 0) {
-        delete cart[id];
-      }
-    }
-    renderCart();
-  }
-
-  function renderCart() {
-    const cartItemsDiv = document.getElementById("cart-items");
-    cartItemsDiv.innerHTML = "";
-    let total = 0;
-    for (const id in cart) {
-      const product = products.find(p => p.id == id);
-      const qty = cart[id];
-      const itemTotal = product.price * qty;
-      total += itemTotal;
-
-      const itemEl = document.createElement("div");
-      itemEl.classList.add("cart-item");
-      itemEl.innerHTML = `
-        ${product.name} x ${qty} : ${itemTotal.toLocaleString()} FCFA 
-        <button onclick="removeFromCart(${id})">-</button>
-      `;
-      cartItemsDiv.appendChild(itemEl);
-    }
-    document.getElementById("total").innerText = `Total : ${total.toLocaleString()} FCFA`;
-
-    const orderBtn = document.getElementById("orderBtn");
-    orderBtn.disabled = total === 0;
-
-    orderBtn.onclick = () => {
-      let message = "Bonjour, je souhaite commander :%0A";
-      for (const id in cart) {
-        const product = products.find(p => p.id == id);
-        const qty = cart[id];
-        message += `- ${product.name} x${qty}%0A`;
-      }
-      message += `Total : ${total.toLocaleString()} FCFA`;
-      // Numéros WhatsApp (modifie si besoin)
-      const phone = "2250713278690";
-      const url = `https://wa.me/${phone}?text=${message}`;
-      window.open(url, "_blank");
-    };
-  }
-
-  renderProducts();
-  renderCart();
-</script>
-
 </body>
-</html>
+
+
+
